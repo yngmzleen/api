@@ -1,9 +1,16 @@
 name: Rebuild GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
   repository_dispatch:
     types: [xml-published]
   workflow_dispatch:
+
+concurrency:
+  group: api-pages-rebuild
+  cancel-in-progress: true
 
 jobs:
   request-pages-build:
